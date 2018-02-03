@@ -1,10 +1,10 @@
 {
-  "name": "koa-compose",
-  "description": "compose Koa middleware",
-  "repository": "koajs/compose",
-  "version": "4.0.0",
+  "name": "logoran-compose",
+  "description": "compose Logoran middleware",
+  "repository": "logoran/compose",
+  "version": "1.0.0",
   "keywords": [
-    "koa",
+    "logoran",
     "middleware",
     "compose"
   ],
