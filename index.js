@@ -37,6 +37,7 @@ function compose (middleware) {
       if (!fn) return Promise.resolve()
       try {
         return Promise.resolve(fn(context, function next (step = 1) {
+          if ('object' == typeof(step)) step = 1
           return dispatch(i + step)
         }))
       } catch (err) {

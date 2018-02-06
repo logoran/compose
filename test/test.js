@@ -257,17 +257,20 @@ describe('Logoran Compose', function () {
     ])({}).then(() => assert.deepEqual(called, [1, 2, 3]))
   })
 
-  it('should throw if next() is called multiple times', () => {
+  it('should middleware can called multiple times', () => {
+    var called = []
+
     return compose([
       async (ctx, next) => {
+        called.push(1)
         await next()
         await next()
+      },
+      (ctx, next) => {
+        called.push(2)
+        return next()
       }
-    ])({}).then(() => {
-      throw new Error('boom')
-    }, (err) => {
-      assert(/multiple times/.test(err.message))
-    })
+    ])({}).then(() => assert.deepEqual(called, [1, 2, 2]))
   })
 
   it('should return a valid middleware', () => {
