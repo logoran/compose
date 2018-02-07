@@ -33,12 +33,21 @@ function compose (middleware) {
     return dispatch(0)
     function dispatch (i) {
       let fn = middleware[i]
-      if (i === middleware.length) fn = next
+      if (i === middleware.length) {
+        if(next && 0 === next.length) {
+          try {
+            return Promise.resolve(next())
+          } catch (err) {
+            return Promise.reject(err)
+          }
+        } else {
+          fn = next
+        }
+      }
       if (!fn) return Promise.resolve()
       try {
-        return Promise.resolve(fn(context, function next (step = 1) {
-          if ('object' == typeof(step)) step = 1
-          return dispatch(i + step)
+        return Promise.resolve(fn(context, function next (offset = 1) {
+          return dispatch(i + offset)
         }))
       } catch (err) {
         return Promise.reject(err)
