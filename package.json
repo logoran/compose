@@ -2,7 +2,7 @@
   "name": "logoran-compose",
   "description": "compose Logoran middleware",
   "repository": "logoran/compose",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "keywords": [
     "logoran",
     "middleware",
